@@ -339,6 +339,9 @@ module JSONAPI
         type_with_module = type.include?('/') ? type : module_path + type
 
         resource_name = _resource_name_from_type(type_with_module)
+
+        Rails.logger.warn "twith=#{type_with_module} rname=#{resource_name}"
+
         resource = resource_name.safe_constantize if resource_name
         if resource.nil?
           fail NameError, "JSONAPI: Could not find resource '#{type}'. (Class #{resource_name} not found)"
